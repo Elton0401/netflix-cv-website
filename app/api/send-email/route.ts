@@ -15,10 +15,16 @@ export async function POST(req: NextRequest) {
     });
 
     const mailOptions = {
-      from: email,
+      from: process.env.EMAIL_USER,
       to: process.env.EMAIL_TO,
-      subject: `New message from ${name}: ${subject}`,
-      text: message,
+      replyTo: email,
+      subject: `New message from your CV website: ${subject} (from ${name})`,
+      text: `Name: ${name}
+Email: ${email}
+Subject: ${subject}
+
+Message:
+${message}`,
     };
 
     await transporter.sendMail(mailOptions);
