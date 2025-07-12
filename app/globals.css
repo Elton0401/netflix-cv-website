@@ -1,0 +1,258 @@
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Netflix Sans Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Netflix-inspired color variables */
+:root {
+  --netflix-bg: #141414;
+  --netflix-red: #E50914;
+  --netflix-red-hover: #B81D24;
+  --netflix-text-primary: #FFFFFF;
+  --netflix-text-secondary: #E5E5E5;
+  --netflix-text-muted: #555555;
+  --netflix-card-bg: #181818;
+  --netflix-card-hover: #222222;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--netflix-bg);
+  color: var(--netflix-text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  color: var(--netflix-text-primary);
+  background: var(--netflix-bg);
+}
+
+/* Netflix-style scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--netflix-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--netflix-text-muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--netflix-text-secondary);
+}
+
+/* Hide scrollbar for horizontal scroll containers */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Netflix button styles */
+.netflix-button-primary {
+  background-color: var(--netflix-red);
+  color: var(--netflix-text-primary);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.netflix-button-primary:hover {
+  background-color: var(--netflix-red-hover);
+  transform: scale(1.05);
+}
+
+.netflix-button-secondary {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--netflix-text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.netflix-button-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Netflix card styles */
+.netflix-card {
+  background-color: var(--netflix-card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.netflix-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(229, 9, 20, 0.3);
+  background-color: var(--netflix-card-hover);
+}
+
+/* Red glow effect for special elements */
+.netflix-glow {
+  box-shadow: 0 0 20px rgba(229, 9, 20, 0.3);
+}
+
+.netflix-glow:hover {
+  box-shadow: 0 8px 30px rgba(229, 9, 20, 0.5);
+}
+
+/* Typography utilities */
+.netflix-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.netflix-subtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--netflix-text-secondary);
+  margin-bottom: 2rem;
+}
+
+.netflix-body {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--netflix-text-secondary);
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(229, 9, 20, 0.6);
+  }
+}
+
+/* Utility animation classes */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slide-in-left {
+  animation: slideInFromLeft 0.6s ease-out;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s infinite;
+}
+
+/* Responsive design utilities */
+@media (max-width: 768px) {
+  .netflix-title {
+    font-size: 2.5rem;
+  }
+  
+  .netflix-subtitle {
+    font-size: 1.25rem;
+  }
+  
+  .netflix-button-primary,
+  .netflix-button-secondary {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Form styles */
+.netflix-input {
+  background-color: var(--netflix-card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--netflix-text-primary);
+  padding: 12px 16px;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.netflix-input:focus {
+  outline: none;
+  border-color: var(--netflix-red);
+  box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.2);
+}
+
+.netflix-input::placeholder {
+  color: var(--netflix-text-muted);
+}
+
+/* Loading animation */
+.netflix-spinner {
+  border: 2px solid var(--netflix-text-muted);
+  border-top: 2px solid var(--netflix-red);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Gradient overlays */
+.gradient-overlay {
+  background: linear-gradient(90deg, rgba(20, 20, 20, 1) 0%, rgba(20, 20, 20, 0.8) 50%, rgba(20, 20, 20, 0) 100%);
+}
+
+.gradient-overlay-vertical {
+  background: linear-gradient(180deg, rgba(20, 20, 20, 0) 0%, rgba(20, 20, 20, 0.8) 80%, rgba(20, 20, 20, 1) 100%);
+}

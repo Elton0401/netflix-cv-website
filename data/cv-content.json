@@ -1,0 +1,337 @@
+
+{
+  "personal_info": {
+    "name": "Elton Gomes",
+    "title": "Student",
+    "location": "Ignaz Schön Straße 34, Schweinfurt, 97421, Germany",
+    "phone": "+4915129510880",
+    "email": "eltongomes642@gmail.com",
+    "date_of_birth": "04/01/2003",
+    "linkedin": "Available",
+    "professional_summary": "Motivated Business and Engineering student with a strong interest for dynamic brand environments, youth culture, and experiential marketing. Skilled in social media marketing, CRM and campaign planning. Passion for innovation and visual storytelling.",
+    "current_education": "Business And Engineering (IBE), THWS – University of Applied Sciences Würzburg-Schweinfurt",
+    "gpa": "2.96",
+    "languages": ["English", "German", "French"],
+    "hobbies": ["YouTube", "Trading", "Gaming", "Computer Enthusiast"]
+  },
+  "categories": {
+    "product_dev_management_marketing": {
+      "title": "Product Dev/Management/Marketing",
+      "description": "Innovation-driven product development and strategic marketing expertise",
+      "experiences": [
+        {
+          "role": "Product Development Projects",
+          "company": "Academic Projects",
+          "duration": "2021-2024",
+          "achievements": [
+            "Designed a lightweight, ultra-portable baby stroller meeting strict weight and usability requirements",
+            "Developed an automated concept for sorting screws by head type, aimed at enhancing manufacturing efficiency",
+            "Engineered a mechanical chess sorter to efficiently organize chess pieces, integrating innovative design features"
+          ],
+          "skills_used": ["Product Development", "Problem Solving", "Design Innovation"],
+          "metrics": "3 successful product concepts developed"
+        },
+        {
+          "role": "Digital Marketing Project Lead",
+          "company": "Company Mondu",
+          "duration": "2023-2024",
+          "achievements": [
+            "Collaborated in a team to design and execute a comprehensive digital marketing strategy from scratch",
+            "Conducted in-depth company analysis to define objectives and develop targeted strategies",
+            "Created detailed customer personas and mapped the customer journey",
+            "Implemented SEO, SEA, WordPress, Social media marketing, email marketing with automation"
+          ],
+          "skills_used": ["Digital Marketing", "SEO", "Customer Journey Mapping", "Content Strategy"],
+          "metrics": "Full-scale digital marketing strategy implementation"
+        },
+        {
+          "role": "Product Management Job Simulation",
+          "company": "Forage",
+          "duration": "April 2025",
+          "achievements": [
+            "Completed comprehensive product management simulation",
+            "Applied strategic product development methodologies"
+          ],
+          "skills_used": ["Product Management", "Strategic Planning"],
+          "metrics": "Professional simulation completed"
+        }
+      ],
+      "key_skills": ["Product Development", "Digital Marketing", "SEO optimization", "Customer Journey Mapping", "Innovation Design"]
+    },
+    "brand": {
+      "title": "Brand",
+      "description": "Creative brand strategy and visual storytelling expertise",
+      "experiences": [
+        {
+          "role": "Brand Strategy Specialist",
+          "company": "Custom Computers Startup",
+          "duration": "2023",
+          "achievements": [
+            "Developed unique value proposition: 'Unleash Your Potential – Custom computers tailored to your unique needs, combining high performance with personalized design'",
+            "Conducted comprehensive market research and competitive analysis",
+            "Created brand positioning strategy for B2B and B2C markets"
+          ],
+          "skills_used": ["Brand Analysis", "Market Research", "Value Proposition Development"],
+          "metrics": "Complete brand strategy and business plan developed"
+        },
+        {
+          "role": "Branding & Design Job Simulation",
+          "company": "Forage",
+          "duration": "April 2024",
+          "achievements": [
+            "Completed professional branding and design simulation",
+            "Applied creative design principles to brand development"
+          ],
+          "skills_used": ["Brand Analysis", "Creative Design", "Visual Storytelling"],
+          "metrics": "Professional certification achieved"
+        },
+        {
+          "role": "Content Creator",
+          "company": "MyCaptain - Social Media Course",
+          "duration": "April 2021 — May 2021",
+          "achievements": [
+            "Completed specialized social media content creation course",
+            "Developed skills in visual storytelling and brand communication"
+          ],
+          "skills_used": ["Social Media Marketing", "Content Creation", "Visual Storytelling"],
+          "metrics": "Professional course certification"
+        }
+      ],
+      "key_skills": ["Brand Analysis", "Visual Storytelling", "Adobe Creative Suite", "Social Media Marketing", "Creative Design"]
+    },
+    "b2b_digital_marketing": {
+      "title": "B2B/Digital Marketing",
+      "description": "Strategic B2B marketing and digital campaign expertise",
+      "experiences": [
+        {
+          "role": "B2B Marketing Strategist",
+          "company": "PagerDuty (Applied Project)",
+          "duration": "2023-2024",
+          "achievements": [
+            "Strategized & executed targeted B2B campaigns using account-based marketing (ABM)",
+            "Engaged enterprise clients through case studies and LinkedIn Ads for IT/DevOps decision-makers",
+            "Analyzed market trends and developed content strategies",
+            "Optimized campaigns to boost brand visibility and lead generation"
+          ],
+          "skills_used": ["B2B Marketing", "Account-Based Marketing", "LinkedIn Ads", "Content Strategy"],
+          "metrics": "Successful ABM campaign execution for enterprise clients"
+        },
+        {
+          "role": "B2B Marketing Consultant",
+          "company": "Bosch Rexroth (Applied Project)",
+          "duration": "2023",
+          "achievements": [
+            "Collaborated on B2B marketing plan for hydraulics division",
+            "Focused on digital marketing strategies and process optimization",
+            "Contributed to project planning and stakeholder communication"
+          ],
+          "skills_used": ["B2B Marketing", "Digital Marketing", "Process Optimization", "Stakeholder Management"],
+          "metrics": "Strategic marketing plan delivered for major industrial client"
+        },
+        {
+          "role": "Digital Marketing Intern",
+          "company": "CIGNEX Technologies Pvt. Ltd",
+          "duration": "September 2021 — November 2021",
+          "achievements": [
+            "Supported email and LinkedIn campaigns targeting international leads",
+            "Utilized CRM systems to accurately track and manage customer data",
+            "Developed enablement content including slide decks and newsletters"
+          ],
+          "skills_used": ["CRM Management", "Email Marketing", "LinkedIn Campaigns", "Content Development"],
+          "metrics": "International lead generation campaigns managed"
+        }
+      ],
+      "key_skills": ["B2B Marketing", "Digital Marketing", "Google Ads", "CRM Management", "Account-Based Marketing", "LinkedIn Ads"]
+    },
+    "business_development": {
+      "title": "Business Development",
+      "description": "Strategic business growth and international market expansion",
+      "experiences": [
+        {
+          "role": "International Business Developer",
+          "company": "The Cubical (US-based)",
+          "duration": "2023",
+          "achievements": [
+            "Worked with US-based company to develop and execute marketing campaigns across multiple international markets",
+            "Conducted market research to adapt marketing strategies to diverse cultural contexts",
+            "Enhanced global brand penetration through localized strategies"
+          ],
+          "skills_used": ["International Marketing", "Market Research", "Cultural Adaptation", "Global Strategy"],
+          "metrics": "Multi-market international campaign execution"
+        },
+        {
+          "role": "Business Strategy Consultant",
+          "company": "Custom Computers Startup",
+          "duration": "2023",
+          "achievements": [
+            "Developed comprehensive business plan for custom computer startup",
+            "Conducted market research and competitive analysis",
+            "Formulated financial projections and growth strategy",
+            "Validated business concept through strategic analysis"
+          ],
+          "skills_used": ["Business Planning", "Market Analysis", "Financial Projections", "Growth Strategy"],
+          "metrics": "Complete business plan with financial projections developed"
+        },
+        {
+          "role": "Strategy Consulting Job Simulation",
+          "company": "Forage",
+          "duration": "April 2024",
+          "achievements": [
+            "Completed professional strategy consulting simulation",
+            "Applied strategic business development methodologies"
+          ],
+          "skills_used": ["Strategic Consulting", "Business Analysis", "Problem Solving"],
+          "metrics": "Professional simulation certification"
+        }
+      ],
+      "key_skills": ["International Marketing", "Business Planning", "Market Research", "Strategic Consulting", "Growth Strategy"]
+    },
+    "project_management": {
+      "title": "Project Management",
+      "description": "Cross-functional project leadership and process optimization",
+      "experiences": [
+        {
+          "role": "Project Management Assistant",
+          "company": "CIGNEX Technologies Pvt. Ltd",
+          "duration": "September 2021 — November 2021",
+          "achievements": [
+            "Assisted Project Manager in organizing internal communications and meetings for cross-functional teams",
+            "Ensured timely delivery of project updates across departments",
+            "Coordinated stakeholder communication and project tracking"
+          ],
+          "skills_used": ["Project Management", "Cross-functional Coordination", "Stakeholder Communication"],
+          "metrics": "Successfully managed communications for multiple cross-functional teams"
+        },
+        {
+          "role": "Business Process Analyst",
+          "company": "Academic Project",
+          "duration": "2023",
+          "achievements": [
+            "Developed BPMN models to integrate selected product into SAP and AP Plus systems",
+            "Analyzed and optimized business workflows to enhance operational efficiency",
+            "Ensured seamless software integration through process modeling"
+          ],
+          "skills_used": ["Business Process Modeling", "SAP Integration", "Process Optimization", "BPMN"],
+          "metrics": "Complete system integration process designed and optimized"
+        },
+        {
+          "role": "Applied Project Management",
+          "company": "Bosch Rexroth",
+          "duration": "2023",
+          "achievements": [
+            "Assisted in project planning and stakeholder communication",
+            "Contributed to performance tracking and project success metrics",
+            "Supported overall initiative success through systematic project management"
+          ],
+          "skills_used": ["Project Planning", "Performance Tracking", "Stakeholder Management"],
+          "metrics": "Contributed to successful project delivery for major industrial client"
+        }
+      ],
+      "key_skills": ["Project Management", "Business Process Modeling", "Stakeholder Communication", "Performance Tracking", "Cross-functional Coordination"]
+    },
+    "sales": {
+      "title": "Sales",
+      "description": "B2B sales strategy and customer relationship management",
+      "experiences": [
+        {
+          "role": "Sales Strategy Student",
+          "company": "THWS University - Sales Focus",
+          "duration": "October 2021 — Present",
+          "achievements": [
+            "Specialized in Sales modules including Principles of B2B-Marketing and Sales",
+            "Completed Applied B2B-Marketing and Sales coursework",
+            "Studied Digital Marketing and International Marketing with sales focus",
+            "Maintained strong academic performance with 2.96 GPA"
+          ],
+          "skills_used": ["B2B Sales", "Sales Strategy", "Digital Sales", "International Sales"],
+          "metrics": "Academic specialization in sales with 2.96 GPA"
+        },
+        {
+          "role": "Lead Generation Specialist",
+          "company": "CIGNEX Technologies Pvt. Ltd",
+          "duration": "September 2021 — November 2021",
+          "achievements": [
+            "Supported email and LinkedIn campaigns targeting international leads",
+            "Utilized CRM systems for accurate customer data tracking and management",
+            "Contributed to international lead generation efforts"
+          ],
+          "skills_used": ["Lead Generation", "CRM Management", "International Sales", "LinkedIn Sales"],
+          "metrics": "International lead generation campaigns supported"
+        },
+        {
+          "role": "B2B Sales Strategist",
+          "company": "PagerDuty (Applied Project)",
+          "duration": "2023-2024",
+          "achievements": [
+            "Executed targeted B2B campaigns for enterprise clients",
+            "Engaged IT/DevOps decision-makers through strategic LinkedIn Ads",
+            "Developed sales-focused content strategies for lead conversion"
+          ],
+          "skills_used": ["B2B Sales", "Enterprise Sales", "LinkedIn Sales", "Sales Content Strategy"],
+          "metrics": "Enterprise client engagement through strategic B2B campaigns"
+        }
+      ],
+      "key_skills": ["B2B Sales", "CRM Management", "Lead Generation", "LinkedIn Sales", "Enterprise Sales", "International Sales"]
+    }
+  },
+  "technical_skills": {
+    "programming": ["Python", "SQL", "HTML"],
+    "data_analysis": ["Power BI", "Data Analysis"],
+    "marketing_tools": ["Google Ads", "HubSpot", "Semrush", "SEO optimization"],
+    "design_tools": ["Adobe Creative Suite", "Photoshop", "Premier Pro"],
+    "office_suite": ["Microsoft Office Suite", "Word", "PowerPoint", "Excel"],
+    "business_tools": ["CRM Systems", "BPMN Modeling", "SAP Integration"]
+  },
+  "education": {
+    "current": {
+      "degree": "Business And Engineering (IBE)",
+      "institution": "THWS – University of Applied Sciences Würzburg-Schweinfurt",
+      "location": "Schweinfurt",
+      "duration": "October 2021 — Present",
+      "gpa": "2.96",
+      "focus": "Sales (Modules: Principles of B2B-Marketing and Sales, Applied B2B-Marketing and Sales, Digital Marketing, International Marketing)"
+    },
+    "previous": {
+      "degree": "13th Year Education",
+      "institution": "Christ University",
+      "location": "Bengaluru",
+      "duration": "August 2020 — September 2021",
+      "focus": "Computer Science (requirement for Bachelor's degree in Germany)"
+    }
+  },
+  "certifications": [
+    {
+      "name": "Data Science",
+      "provider": "Smartknower",
+      "date": "December 2020 — January 2021"
+    },
+    {
+      "name": "Social Media Content Creation Course",
+      "provider": "MyCaptain",
+      "date": "April 2021 — May 2021"
+    },
+    {
+      "name": "Branding & Design Job Simulation",
+      "provider": "Forage",
+      "date": "April 2024"
+    },
+    {
+      "name": "Strategy Consulting Job Simulation",
+      "provider": "Forage",
+      "date": "April 2024"
+    },
+    {
+      "name": "Product Management Job Simulation",
+      "provider": "Forage",
+      "date": "April 2025"
+    }
+  ],
+  "key_metrics": {
+    "total_projects": "8+",
+    "international_experience": "3 countries (Germany, India, USA)",
+    "academic_gpa": "2.96",
+    "languages_spoken": "3",
+    "certifications_earned": "5",
+    "years_of_experience": "3+ years (including internships and projects)"
+  }
+}
