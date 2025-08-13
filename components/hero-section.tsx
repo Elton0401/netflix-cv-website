@@ -36,10 +36,10 @@ export default function HeroSection({ personalInfo, keyMetrics }: HeroSectionPro
   const handleDownloadCV = () => {
     try {
       // Download the actual CV PDF file
-      const cvUrl = '/assets/Elton_Gomes_CV.pdf'
+      const cvUrl = '/assets/Elton_Gomes_Internship_Unsolicited_CV.pdf'
       const link = document.createElement('a')
       link.href = cvUrl
-      link.download = 'Elton_Gomes_CV.pdf'
+      link.download = 'Elton_Gomes_Internship_Unsolicited_CV.pdf'
       link.setAttribute('target', '_blank')
       link.setAttribute('rel', 'noopener noreferrer')
       document.body.appendChild(link)
@@ -48,7 +48,7 @@ export default function HeroSection({ personalInfo, keyMetrics }: HeroSectionPro
     } catch (error) {
       console.error('Error downloading CV:', error)
       // Fallback: open in new tab
-      window.open('/assets/Elton_Gomes_CV.pdf', '_blank')
+      window.open('/assets/Elton_Gomes_Internship_Unsolicited_CV.pdf', '_blank')
     }
   }
 
