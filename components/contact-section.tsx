@@ -1,309 +1,154 @@
-
 'use client'
 
-import { motion } from 'framer-motion'
-import { useState } from 'react'
-import { Mail, Phone, MapPin, Send, Download, Linkedin } from 'lucide-react'
+import { useState, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { Envelope, Phone, MapPin, LinkedinLogo, DownloadSimple, PaperPlaneTilt, CheckCircle, WarningCircle, CircleNotch } from '@phosphor-icons/react'
 
-interface PersonalInfo {
-  name: string
-  email: string
-  phone: string
-  location: string
-  linkedin: string
-}
+const ease: [number, number, number, number] = [0.23, 1, 0.32, 1]
+type Status = 'idle' | 'loading' | 'success' | 'error'
 
-interface ContactSectionProps {
-  personalInfo: PersonalInfo
-}
+const inputBase = 'w-full px-4 py-3 bg-slate-900/60 border border-slate-800/80 rounded-xl text-slate-100 placeholder-slate-600 text-sm focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/15 transition-colors duration-150'
 
-export default function ContactSection({ personalInfo }: ContactSectionProps) {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+const contactLinks = [
+  { icon: Envelope,     label: 'eltongomes642@gmail.com',    href: 'mailto:eltongomes642@gmail.com',  external: false },
+  { icon: Phone,        label: '+49 151 2951 0880',          href: 'tel:+4915129510880',              external: false },
+  { icon: MapPin,       label: 'Hamburg, Germany',           href: undefined,                         external: false },
+  { icon: LinkedinLogo, label: 'linkedin.com/in/eltongomes', href: 'https://linkedin.com/in/eltongomes', external: true },
+]
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
+export default function ContactSection() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const [form, setForm]     = useState({ name: '', email: '', subject: '', message: '' })
+  const [status, setStatus] = useState<Status>('idle')
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
+    e.preventDefault()
+    setStatus('loading')
     try {
-      const response = await fetch('/api/send-email', {
+      const res = await fetch('/api/send-email', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      } else {
-        setSubmitStatus('error');
-      }
-    } catch (error) {
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-      setTimeout(() => setSubmitStatus('idle'), 3000);
-    }
-  };
-
-  const handleDownloadCV = () => {
-    try {
-      // Download the actual CV PDF file
-      const cvUrl = '/assets/Elton_Gomes_Internship_Unsolicited_CV.pdf'
-      const link = document.createElement('a')
-      link.href = cvUrl
-      link.download = 'Elton_Gomes_Internship_Unsolicited_CV.pdf'
-      link.setAttribute('target', '_blank')
-      link.setAttribute('rel', 'noopener noreferrer')
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-    } catch (error) {
-      console.error('Error downloading CV:', error)
-      // Fallback: open in new tab
-      window.open('/assets/Elton_Gomes_Internship_Unsolicited_CV.pdf', '_blank')
-    }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (res.ok) { setStatus('success'); setForm({ name: '', email: '', subject: '', message: '' }) }
+      else setStatus('error')
+    } catch { setStatus('error') }
   }
 
   return (
-    <section id="contact" className="py-16 bg-gradient-to-b from-[#0f0f0f] to-[#141414]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
+    <section id="contact" ref={ref} className="py-32">
+      <div className="max-w-7xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+          initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease }}
+          className="mb-16 flex items-end gap-6"
         >
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
-            Get In Touch
-          </h2>
-          <p className="text-lg text-[#E5E5E5] max-w-2xl mx-auto">
-            Ready to discuss opportunities or collaborate on exciting projects
-          </p>
+          <div>
+            <p className="text-emerald-400 text-xs font-semibold uppercase tracking-widest mb-2">Get In Touch</p>
+            <h2 className="text-5xl font-extrabold tracking-tighter text-slate-50 leading-none">Contact</h2>
+          </div>
+          <span className="text-[7rem] font-black leading-none text-slate-800/50 select-none mb-[-0.1em] tracking-tighter">06</span>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
+        <div className="grid lg:grid-cols-5 gap-12">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="space-y-8"
+            initial={{ opacity: 0, x: -24 }} animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.65, ease, delay: 0.1 }}
+            className="lg:col-span-2 space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-bold text-white mb-6">
-                Contact Information
-              </h3>
-              
-              <div className="space-y-6">
-                <motion.div
-                  whileHover={{ x: 10 }}
-                  className="flex items-center space-x-4 p-4 netflix-card hover:bg-[#222222] transition-all duration-300"
-                >
-                  <div className="w-12 h-12 rounded-full bg-[#E50914] bg-opacity-20 flex items-center justify-center">
-                    <Mail className="w-6 h-6 text-[#E50914]" />
-                  </div>
-                  <div>
-                    <p className="text-[#E5E5E5] text-sm">Email</p>
-                    <p className="text-white font-medium">
-                      {personalInfo?.email || 'eltongomes642@gmail.com'}
-                    </p>
-                  </div>
-                </motion.div>
+              <p className="text-slate-400 text-base leading-relaxed mb-8 max-w-[38ch]">
+                Whether you have an opportunity, a question, or just want to say hi — my inbox is open.
+              </p>
 
-                <motion.div
-                  whileHover={{ x: 10 }}
-                  className="flex items-center space-x-4 p-4 netflix-card hover:bg-[#222222] transition-all duration-300"
-                >
-                  <div className="w-12 h-12 rounded-full bg-[#E50914] bg-opacity-20 flex items-center justify-center">
-                    <Phone className="w-6 h-6 text-[#E50914]" />
-                  </div>
-                  <div>
-                    <p className="text-[#E5E5E5] text-sm">Phone</p>
-                    <p className="text-white font-medium">
-                      {personalInfo?.phone || '+4915129510880'}
-                    </p>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  whileHover={{ x: 10 }}
-                  className="flex items-center space-x-4 p-4 netflix-card hover:bg-[#222222] transition-all duration-300"
-                >
-                  <div className="w-12 h-12 rounded-full bg-[#E50914] bg-opacity-20 flex items-center justify-center">
-                    <MapPin className="w-6 h-6 text-[#E50914]" />
-                  </div>
-                  <div>
-                    <p className="text-[#E5E5E5] text-sm">Location</p>
-                    <p className="text-white font-medium">
-                      Schweinfurt, Germany
-                    </p>
-                  </div>
-                </motion.div>
+              <div className="space-y-3">
+                {contactLinks.map(({ icon: Icon, label, href, external }) =>
+                  href ? (
+                    <motion.a key={label} href={href}
+                      target={external ? '_blank' : undefined}
+                      rel={external ? 'noopener noreferrer' : undefined}
+                      whileTap={{ scale: 0.97 }}
+                      className="flex items-center gap-3 text-slate-400 hover:text-slate-200 transition-colors duration-150 group"
+                    >
+                      <div className="w-9 h-9 bg-slate-800/60 border border-slate-700/50 rounded-lg flex items-center justify-center group-hover:border-emerald-500/30 transition-colors duration-150 shrink-0">
+                        <Icon size={14} weight="bold" className="text-emerald-400" />
+                      </div>
+                      <span className="text-sm">{label}</span>
+                    </motion.a>
+                  ) : (
+                    <div key={label} className="flex items-center gap-3 text-slate-400">
+                      <div className="w-9 h-9 bg-slate-800/60 border border-slate-700/50 rounded-lg flex items-center justify-center shrink-0">
+                        <Icon size={14} weight="bold" className="text-emerald-400" />
+                      </div>
+                      <span className="text-sm">{label}</span>
+                    </div>
+                  )
+                )}
               </div>
             </div>
 
-            {/* Action buttons */}
-            <div className="space-y-4">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleDownloadCV}
-                className="w-full netflix-button-primary flex items-center justify-center space-x-2 py-4"
-              >
-                <Download className="w-5 h-5" />
-                <span>Download CV</span>
-              </motion.button>
-
+            <div className="pt-2 border-t border-slate-800/50">
               <motion.a
-                href="https://www.linkedin.com/in/eltongomes642"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                className="w-full netflix-button-secondary flex items-center justify-center space-x-2 py-3 text-decoration-none"
+                href="/assets/Elton_Gomes_Internship_Unsolicited_CV.pdf"
+                download
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-sm transition-colors duration-150"
               >
-                <Linkedin className="w-5 h-5" />
-                <span>LinkedIn Profile</span>
+                <DownloadSimple size={14} weight="bold" />Download CV
               </motion.a>
             </div>
           </motion.div>
 
-          {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, x: 24 }} animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.65, ease, delay: 0.2 }}
+            className="lg:col-span-3"
           >
-            <div className="netflix-card p-8">
-              <h3 className="text-2xl font-bold text-white mb-6">
-                Send a Message
-              </h3>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="name" className="block text-[#E5E5E5] text-sm font-medium mb-2">
-                      Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full netflix-input"
-                      placeholder="Your name"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-[#E5E5E5] text-sm font-medium mb-2">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full netflix-input"
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-                </div>
-
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="subject" className="block text-[#E5E5E5] text-sm font-medium mb-2">
-                    Subject *
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full netflix-input"
-                    placeholder="What's this about?"
-                  />
+                  <label htmlFor="contact-name" className="block text-sm font-medium text-slate-400 mb-1.5">Name</label>
+                  <input id="contact-name" type="text" name="name" value={form.name} onChange={handleChange} required placeholder="Your name" className={inputBase} />
                 </div>
-
                 <div>
-                  <label htmlFor="message" className="block text-[#E5E5E5] text-sm font-medium mb-2">
-                    Message *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    required
-                    rows={5}
-                    className="w-full netflix-input resize-none"
-                    placeholder="Tell me about your project or opportunity..."
-                  />
+                  <label htmlFor="contact-email" className="block text-sm font-medium text-slate-400 mb-1.5">Email</label>
+                  <input id="contact-email" type="email" name="email" value={form.email} onChange={handleChange} required placeholder="your@email.com" className={inputBase} />
                 </div>
+              </div>
+              <div>
+                <label htmlFor="contact-subject" className="block text-sm font-medium text-slate-400 mb-1.5">Subject</label>
+                <input id="contact-subject" type="text" name="subject" value={form.subject} onChange={handleChange} required placeholder="What's this about?" className={inputBase} />
+              </div>
+              <div>
+                <label htmlFor="contact-message" className="block text-sm font-medium text-slate-400 mb-1.5">Message</label>
+                <textarea id="contact-message" name="message" value={form.message} onChange={handleChange} required rows={5} placeholder="Tell me more..." className={`${inputBase} resize-none`} />
+              </div>
 
-                <motion.button
-                  type="submit"
-                  disabled={isSubmitting}
-                  whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
-                  whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
-                  className="w-full netflix-button-primary flex items-center justify-center space-x-2 py-4 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? (
-                    <div className="netflix-spinner" />
-                  ) : (
-                    <>
-                      <Send className="w-5 h-5" />
-                      <span>Send Message</span>
-                    </>
-                  )}
-                </motion.button>
+              {status === 'success' && (
+                <div className="flex items-center gap-2 px-4 py-3 bg-emerald-500/8 border border-emerald-500/20 rounded-xl text-emerald-400 text-sm">
+                  <CheckCircle size={14} weight="fill" />Message sent. I&apos;ll get back to you soon.
+                </div>
+              )}
+              {status === 'error' && (
+                <div className="flex items-center gap-2 px-4 py-3 bg-red-500/8 border border-red-500/20 rounded-xl text-red-400 text-sm">
+                  <WarningCircle size={14} weight="fill" />Something went wrong. Please email me directly.
+                </div>
+              )}
 
-                {/* Status messages */}
-                {submitStatus === 'success' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-green-400 text-sm text-center"
-                  >
-                    Message sent successfully! I'll get back to you soon.
-                  </motion.div>
-                )}
-
-                {submitStatus === 'error' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-red-400 text-sm text-center"
-                  >
-                    Something went wrong. Please try again or contact me directly.
-                  </motion.div>
-                )}
-              </form>
-            </div>
+              <motion.button type="submit" disabled={status === 'loading'}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-xl text-sm transition-colors duration-150"
+              >
+                {status === 'loading'
+                  ? <><CircleNotch size={14} weight="bold" className="animate-spin" />Sending...</>
+                  : <><PaperPlaneTilt size={14} weight="bold" />Send Message</>}
+              </motion.button>
+            </form>
           </motion.div>
         </div>
       </div>

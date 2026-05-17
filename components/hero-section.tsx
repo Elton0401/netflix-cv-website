@@ -1,259 +1,130 @@
-
 'use client'
 
-import { motion } from 'framer-motion'
-import { MapPin, Mail, Phone, Download, ExternalLink } from 'lucide-react'
 import Image from 'next/image'
-import CountUpNumber from './count-up-number'
+import { motion } from 'framer-motion'
+import { LinkedinLogo, DownloadSimple, ArrowRight, MapPin } from '@phosphor-icons/react'
 
-interface PersonalInfo {
-  name: string
-  title: string
-  location: string
-  phone: string
-  email: string
-  professional_summary: string
-  current_education: string
-  gpa: string
-  languages: string[]
-}
+const ease: [number, number, number, number] = [0.23, 1, 0.32, 1]
 
-interface KeyMetrics {
-  total_projects: string
-  international_experience: string
-  academic_gpa: string
-  languages_spoken: string
-  certifications_earned: string
-  years_of_experience: string
-}
+const fadeUp = (delay = 0) => ({
+  hidden: { opacity: 0, y: 32 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.75, ease, delay } },
+})
 
-interface HeroSectionProps {
-  personalInfo: PersonalInfo
-  keyMetrics: KeyMetrics
-}
-
-export default function HeroSection({ personalInfo, keyMetrics }: HeroSectionProps) {
-  const handleDownloadCV = () => {
-    try {
-      // Download the actual CV PDF file
-      const cvUrl = '/assets/Elton_Gomes_Internship_Unsolicited_CV.pdf'
-      const link = document.createElement('a')
-      link.href = cvUrl
-      link.download = 'Elton_Gomes_Internship_Unsolicited_CV.pdf'
-      link.setAttribute('target', '_blank')
-      link.setAttribute('rel', 'noopener noreferrer')
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-    } catch (error) {
-      console.error('Error downloading CV:', error)
-      // Fallback: open in new tab
-      window.open('/assets/Elton_Gomes_Internship_Unsolicited_CV.pdf', '_blank')
-    }
-  }
-
-  const handleContact = () => {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-  }
+export default function HeroSection() {
+  const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background with gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#141414] via-[#1a1a1a] to-[#0f0f0f]" />
-      
-      {/* Content container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          
-          {/* Left content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-8"
-          >
-            {/* Name and title */}
-            <div>
-              <motion.h1 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-5xl lg:text-7xl font-bold mb-4"
-              >
-                {personalInfo?.name || 'Elton Gomes'}
-              </motion.h1>
-              <motion.p 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-xl lg:text-2xl text-[#E5E5E5] mb-2"
-              >
-                {personalInfo?.title || 'Business and Engineering Student'}
-              </motion.p>
-              <motion.p 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="text-lg text-[#E50914] font-medium"
-              >
-                {personalInfo?.current_education || 'THWS University'}
-              </motion.p>
-            </div>
+    <section id="hero" className="relative min-h-[100dvh] flex items-center pt-20 pb-20">
+      <div className="max-w-7xl mx-auto px-6 w-full">
+        <div className="grid lg:grid-cols-[1fr_320px] gap-16 xl:gap-28 items-center">
 
-            {/* Professional summary */}
-            <motion.p 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-lg text-[#E5E5E5] leading-relaxed max-w-2xl"
+          {/* LEFT — clean, no repeated details */}
+          <div>
+            <motion.div
+              variants={fadeUp(0.05)} initial="hidden" animate="show"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase tracking-widest mb-10"
             >
-              {personalInfo?.professional_summary || 'Motivated Business and Engineering student with expertise in product development, marketing, and business strategy.'}
+              <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse-dot" />
+              Open to opportunities
+            </motion.div>
+
+            <motion.h1
+              variants={fadeUp(0.15)} initial="hidden" animate="show"
+              className="text-[clamp(4rem,11vw,8rem)] font-extrabold tracking-tighter leading-[0.88] mb-8 text-slate-50"
+            >
+              Elton<br />
+              <span className="text-emerald-400">Gomes</span>
+            </motion.h1>
+
+            <motion.p
+              variants={fadeUp(0.25)} initial="hidden" animate="show"
+              className="text-slate-300 text-lg sm:text-xl leading-relaxed mb-12 max-w-[46ch] font-medium"
+            >
+              Business &amp; Engineering student bridging marketing strategy
+              with engineering precision. Specialising in creator management,
+              CRM campaigns, and digital growth.
             </motion.p>
 
-            {/* Contact info */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              className="grid sm:grid-cols-2 gap-4 text-[#E5E5E5]"
+            <motion.div
+              variants={fadeUp(0.35)} initial="hidden" animate="show"
+              className="flex flex-wrap gap-4"
             >
-              <div className="flex items-center space-x-3">
-                <MapPin className="w-5 h-5 text-[#E50914]" />
-                <span className="text-sm">{personalInfo?.location?.split(',')[1] || 'Schweinfurt, Germany'}</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-[#E50914]" />
-                <span className="text-sm">{personalInfo?.email || 'eltongomes642@gmail.com'}</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-[#E50914]" />
-                <span className="text-sm">{personalInfo?.phone || '+49151 295 10880'}</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <ExternalLink className="w-5 h-5 text-[#E50914]" />
-                <span className="text-sm">
-                  Languages: {personalInfo?.languages?.join(', ') || 'English, German, French'}
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Action buttons */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="flex flex-col sm:flex-row gap-4"
-            >
-              <button
-                onClick={handleDownloadCV}
-                className="netflix-button-primary flex items-center justify-center space-x-2 px-8 py-3 text-lg font-semibold rounded-md transition-all duration-300 hover:scale-105"
+              <motion.a
+                href="/assets/Elton_Gomes_Internship_Unsolicited_CV.pdf"
+                download
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-sm transition-colors duration-150"
               >
-                <Download className="w-5 h-5" />
-                <span>Download CV</span>
-              </button>
-              <button
-                onClick={handleContact}
-                className="netflix-button-secondary flex items-center justify-center space-x-2 px-8 py-3 text-lg font-semibold rounded-md transition-all duration-300 hover:scale-105"
+                <DownloadSimple size={15} weight="bold" />Download CV
+              </motion.a>
+              <motion.a
+                href="https://linkedin.com/in/eltongomes"
+                target="_blank" rel="noopener noreferrer"
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 glass-surface hover:border-slate-600 text-slate-300 hover:text-white font-semibold rounded-xl text-sm transition-colors duration-150"
               >
-                <Mail className="w-5 h-5" />
-                <span>Contact Me</span>
-              </button>
+                <LinkedinLogo size={15} weight="bold" />LinkedIn
+              </motion.a>
+              <motion.button
+                onClick={() => scrollTo('contact')}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-2 px-4 py-3.5 text-slate-400 hover:text-emerald-400 font-medium transition-colors duration-150 text-sm group"
+              >
+                Get in touch <ArrowRight size={15} weight="bold" className="group-hover:translate-x-0.5 transition-transform duration-150" />
+              </motion.button>
             </motion.div>
-          </motion.div>
+          </div>
 
-          {/* Right content - Key metrics */}
+          {/* RIGHT — compact profile card with real photo */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="space-y-8"
+            transition={{ duration: 0.85, ease, delay: 0.3 }}
+            className="hidden lg:block"
           >
-            {/* Professional Photo */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="relative mx-auto w-80 h-80 rounded-2xl overflow-hidden netflix-glow mb-8 bg-gradient-to-br from-[#E50914]/20 to-[#B81D24]/20"
-            >
-              <Image
-                src="/assets/elton-professional-photo.jpg"
-                alt="Elton Gomes - Professional Photo"
-                fill
-                className="object-cover object-center"
-                priority
-                sizes="(max-width: 768px) 320px, 320px"
-              />
-              {/* Netflix-style overlay effect */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-            </motion.div>
-
-            {/* Key metrics grid */}
-            <div className="grid grid-cols-2 gap-6">
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-                className="netflix-card p-6 text-center"
-              >
-                <div className="text-3xl font-bold text-[#E50914] mb-2">
-                  <CountUpNumber end={8} suffix="+" />
+            <div className="glass-surface rounded-2xl overflow-hidden">
+              {/* Photo */}
+              <div className="relative w-full aspect-[4/3] overflow-hidden">
+                <Image
+                  src="/assets/elton-professional-photo.jpg"
+                  alt="Elton Gomes"
+                  fill
+                  className="object-cover object-top"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+                {/* Availability badge over photo */}
+                <div className="absolute bottom-3 left-3 flex items-center gap-1.5 px-2.5 py-1 bg-slate-950/80 backdrop-blur-sm border border-emerald-500/30 rounded-full">
+                  <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse-dot" />
+                  <span className="text-emerald-400 text-xs font-semibold">Available Jun 2026</span>
                 </div>
-                <div className="text-sm text-[#E5E5E5]">Total Projects</div>
-              </motion.div>
+              </div>
 
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.9 }}
-                className="netflix-card p-6 text-center"
-              >
-                <div className="text-3xl font-bold text-[#E50914] mb-2">
-                  <CountUpNumber end={3} />
-                </div>
-                <div className="text-sm text-[#E5E5E5]">Countries</div>
-              </motion.div>
+              {/* Info */}
+              <div className="p-5">
+                <h3 className="text-base font-bold text-slate-50 mb-0.5">Elton Gomes</h3>
+                <p className="text-emerald-400 text-sm font-medium mb-4">Business &amp; Engineering Student</p>
 
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.0 }}
-                className="netflix-card p-6 text-center"
-              >
-                <div className="text-3xl font-bold text-[#E50914] mb-2">
-                  <CountUpNumber end={2.96} decimals={2} />
+                <div className="space-y-2.5 text-sm">
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-500 text-xs uppercase tracking-wide font-medium">Currently</span>
+                    <span className="text-slate-200 text-xs font-semibold">Razer (Europe) GmbH</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-500 text-xs uppercase tracking-wide font-medium">Role</span>
+                    <span className="text-slate-400 text-xs">Intern Marketing</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-500 text-xs uppercase tracking-wide font-medium">Location</span>
+                    <span className="text-slate-400 text-xs flex items-center gap-1"><MapPin size={10} weight="fill" />Hamburg, DE</span>
+                  </div>
                 </div>
-                <div className="text-sm text-[#E5E5E5]">Academic GPA</div>
-              </motion.div>
-
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.1 }}
-                className="netflix-card p-6 text-center"
-              >
-                <div className="text-3xl font-bold text-[#E50914] mb-2">
-                  <CountUpNumber end={5} />
-                </div>
-                <div className="text-sm text-[#E5E5E5]">Certifications</div>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         </div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-1 h-8 bg-[#E50914] rounded-full"
-        />
-      </motion.div>
     </section>
   )
 }
