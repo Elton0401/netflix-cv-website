@@ -1,217 +1,113 @@
-
 'use client'
 
-import { motion } from 'framer-motion'
-import { 
-  Code, 
-  BarChart3, 
-  Megaphone, 
-  Palette, 
-  FileText, 
-  Settings,
-  Brain,
-  Target,
-  Users,
-  TrendingUp
-} from 'lucide-react'
+import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react'
 
-interface TechnicalSkills {
-  programming: string[]
-  data_analysis: string[]
-  marketing_tools: string[]
-  design_tools: string[]
-  office_suite: string[]
-  business_tools: string[]
-}
+const ease: [number, number, number, number] = [0.23, 1, 0.32, 1]
+const container = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.07 } } }
+const rowAnim = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease } } }
 
-interface Category {
-  title: string
-  key_skills: string[]
-}
+const skillGroups = [
+  { label: 'Marketing & Growth',  skills: ['SEO Optimization', 'Keyword Research', 'Google Ads', 'A/B Testing', 'GTM Strategy', 'Digital Marketing', 'Brand Analysis', 'Content Strategy'] },
+  { label: 'Tools & Platforms',   skills: ['HubSpot', 'Jira', 'Notion', 'Apollo', 'Snov.io', 'Mailchimp', 'Power BI', 'Google Analytics'] },
+  { label: 'Creative & Design',   skills: ['Adobe Premiere Pro', 'Adobe Photoshop', 'Adobe Creative Suite', 'Content Creation', 'Video Editing'] },
+  { label: 'Business & Strategy', skills: ['Project Management', 'Product Development', 'Market Research', 'Financial Modeling', 'BPMN Modeling', 'ABM Strategy'] },
+  { label: 'Software & Office',   skills: ['Microsoft Office', 'SAP (Basic)', 'Google Workspace', 'Excel / PowerPoint'] },
+]
 
-interface Categories {
-  [key: string]: Category
-}
+const languages = [
+  { name: 'English', level: 'C2',    note: 'Native / Fluent', bar: 100 },
+  { name: 'German',  level: 'A2',    note: 'Beginner',        bar: 20  },
+  { name: 'French',  level: 'Basic', note: 'Elementary',      bar: 12  },
+]
 
-interface SkillsSectionProps {
-  technicalSkills: TechnicalSkills
-  allCategories: Categories
-}
+const hobbies = ['YouTube', 'Trading', 'Gaming', 'Computer Enthusiast']
 
-export default function SkillsSection({ technicalSkills, allCategories }: SkillsSectionProps) {
-  const skillCategories = [
-    {
-      title: 'Programming',
-      icon: Code,
-      skills: technicalSkills?.programming || [],
-      color: 'text-blue-400'
-    },
-    {
-      title: 'Data Analysis',
-      icon: BarChart3,
-      skills: technicalSkills?.data_analysis || [],
-      color: 'text-green-400'
-    },
-    {
-      title: 'Marketing Tools',
-      icon: Megaphone,
-      skills: technicalSkills?.marketing_tools || [],
-      color: 'text-purple-400'
-    },
-    {
-      title: 'Design Tools',
-      icon: Palette,
-      skills: technicalSkills?.design_tools || [],
-      color: 'text-pink-400'
-    },
-    {
-      title: 'Office Suite',
-      icon: FileText,
-      skills: technicalSkills?.office_suite || [],
-      color: 'text-orange-400'
-    },
-    {
-      title: 'Business Tools',
-      icon: Settings,
-      skills: technicalSkills?.business_tools || [],
-      color: 'text-cyan-400'
-    }
-  ]
-
-  const businessSkillCategories = [
-    {
-      title: 'Product & Innovation',
-      icon: Brain,
-      skills: allCategories?.product_dev_management_marketing?.key_skills || [],
-      color: 'text-[#E50914]'
-    },
-    {
-      title: 'Brand & Marketing',
-      icon: Target,
-      skills: [
-        ...(allCategories?.brand?.key_skills || []),
-        ...(allCategories?.b2b_digital_marketing?.key_skills || [])
-      ].slice(0, 6),
-      color: 'text-[#E50914]'
-    },
-    {
-      title: 'Business Development',
-      icon: TrendingUp,
-      skills: allCategories?.business_development?.key_skills || [],
-      color: 'text-[#E50914]'
-    },
-    {
-      title: 'Leadership & Management',
-      icon: Users,
-      skills: [
-        ...(allCategories?.project_management?.key_skills || []),
-        ...(allCategories?.sales?.key_skills || [])
-      ].slice(0, 6),
-      color: 'text-[#E50914]'
-    }
-  ]
+export default function SkillsSection() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section className="py-16 bg-gradient-to-b from-[#141414] to-[#0f0f0f]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
+    <section id="skills" ref={ref} className="py-32">
+      <div className="max-w-7xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+          initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease }}
+          className="mb-16 flex items-end gap-6"
         >
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
-            Skills & Expertise
-          </h2>
-          <p className="text-lg text-[#E5E5E5] max-w-3xl mx-auto">
-            A comprehensive skill set spanning technical, business, and creative domains
-          </p>
+          <div>
+            <p className="text-emerald-400 text-xs font-semibold uppercase tracking-widest mb-2">Competencies</p>
+            <h2 className="text-5xl font-extrabold tracking-tighter text-slate-50 leading-none">Skills &amp; Tools</h2>
+          </div>
+          <span className="text-[7rem] font-black leading-none text-slate-800/50 select-none mb-[-0.1em] tracking-tighter">05</span>
         </motion.div>
 
-        {/* Technical Skills */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <h3 className="text-2xl font-bold text-white mb-8 text-center">
-            Technical Skills
-          </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {skillCategories.map((category, index) => (
-              <motion.div
-                key={category.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="netflix-card p-6 hover:scale-105 transition-transform duration-300"
-              >
-                <div className="flex items-center mb-4">
-                  <category.icon className={`w-6 h-6 ${category.color} mr-3`} />
-                  <h4 className="text-lg font-semibold text-white">
-                    {category.title}
-                  </h4>
-                </div>
+        <div className="grid lg:grid-cols-[1fr_280px] gap-14">
+          {/* Skill categories */}
+          <motion.div variants={container} initial="hidden" animate={inView ? 'show' : 'hidden'}
+            className="divide-y divide-slate-800/40">
+            {skillGroups.map(group => (
+              <motion.div key={group.label} variants={rowAnim}
+                className="py-5 grid sm:grid-cols-[200px_1fr] gap-4 items-start">
+                <p className="text-xs font-bold text-slate-500 uppercase tracking-widest pt-1.5">{group.label}</p>
                 <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill, skillIndex) => (
-                    <span
-                      key={skillIndex}
-                      className="text-xs bg-[#333333] text-[#E5E5E5] px-3 py-1 rounded-full hover:bg-[#444444] transition-colors duration-200"
-                    >
+                  {group.skills.map(skill => (
+                    <motion.span key={skill}
+                      whileTap={{ scale: 0.95 }}
+                      className="px-2.5 py-1 bg-slate-800/50 border border-slate-700/40 hover:border-emerald-500/40 text-slate-300 text-sm rounded-lg cursor-default transition-colors duration-150">
                       {skill}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
               </motion.div>
             ))}
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* Business Skills */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          <h3 className="text-2xl font-bold text-white mb-8 text-center">
-            Business & Strategic Skills
-          </h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {businessSkillCategories.map((category, index) => (
-              <motion.div
-                key={category.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="netflix-card p-6 hover:scale-105 transition-transform duration-300 netflix-glow"
-              >
-                <div className="flex items-center mb-4">
-                  <category.icon className={`w-6 h-6 ${category.color} mr-3`} />
-                  <h4 className="text-lg font-semibold text-white text-center">
-                    {category.title}
-                  </h4>
-                </div>
-                <div className="space-y-2">
-                  {category.skills.map((skill, skillIndex) => (
-                    <div
-                      key={skillIndex}
-                      className="text-sm bg-[#E50914] bg-opacity-10 text-[#E5E5E5] px-3 py-2 rounded-md border border-[#E50914] border-opacity-20 hover:bg-opacity-20 transition-colors duration-200"
-                    >
-                      {skill}
+          {/* Languages + Interests */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.65, ease, delay: 0.25 }}
+            className="space-y-10"
+          >
+            <div>
+              <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-5">Languages</p>
+              <div className="space-y-4">
+                {languages.map(lang => (
+                  <div key={lang.name}>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="text-slate-200 font-semibold text-sm">{lang.name}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-slate-500 text-xs">{lang.note}</span>
+                        <span className="px-1.5 py-0.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs rounded font-bold">{lang.level}</span>
+                      </div>
                     </div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+                    <div className="h-0.5 bg-slate-800 rounded-full overflow-hidden">
+                      <motion.div
+                        className="h-full bg-emerald-500/60 rounded-full"
+                        initial={{ width: 0 }}
+                        animate={inView ? { width: `${lang.bar}%` } : { width: 0 }}
+                        transition={{ duration: 0.8, ease, delay: 0.4 }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Interests</p>
+              <div className="flex flex-wrap gap-2">
+                {hobbies.map(hobby => (
+                  <motion.span key={hobby}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-3 py-1.5 bg-slate-800/50 border border-slate-700/40 hover:border-emerald-500/40 text-slate-300 text-sm rounded-lg cursor-default transition-colors duration-150">
+                    {hobby}
+                  </motion.span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   )

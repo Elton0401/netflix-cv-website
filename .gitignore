@@ -29,3 +29,9 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# claude / agent tooling
+.claude/
+.agents/
+skills-lock.json
+tsconfig.tsbuildinfo
