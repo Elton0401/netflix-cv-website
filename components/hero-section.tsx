@@ -59,7 +59,7 @@ export default function HeroSection() {
                 <DownloadSimple size={15} weight="bold" />Download CV
               </motion.a>
               <motion.a
-                href="https://linkedin.com/in/eltongomes"
+                href="https://www.linkedin.com/in/eltongomes642"
                 target="_blank" rel="noopener noreferrer"
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center gap-2.5 px-7 py-3.5 glass-surface hover:border-slate-600 text-slate-300 hover:text-white font-semibold rounded-xl text-sm transition-colors duration-150"

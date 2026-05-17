@@ -13,7 +13,7 @@ const contactLinks = [
   { icon: Envelope,     label: 'eltongomes642@gmail.com',    href: 'mailto:eltongomes642@gmail.com',  external: false },
   { icon: Phone,        label: '+49 151 2951 0880',          href: 'tel:+4915129510880',              external: false },
   { icon: MapPin,       label: 'Hamburg, Germany',           href: undefined,                         external: false },
-  { icon: LinkedinLogo, label: 'linkedin.com/in/eltongomes', href: 'https://linkedin.com/in/eltongomes', external: true },
+  { icon: LinkedinLogo, label: 'linkedin.com/in/eltongomes642', href: 'https://www.linkedin.com/in/eltongomes642', external: true },
 ]
 
 export default function ContactSection() {
